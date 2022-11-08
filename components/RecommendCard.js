@@ -4,7 +4,7 @@ import Logo from '../components/Logo';
 import { useState } from 'react';
 
 
-function RecommendCard() {
+function RecommendCard({items}) {
     return ( 
         <View style={styles.recommended}>
         <View style={styles.imageview}>
@@ -12,9 +12,9 @@ function RecommendCard() {
         </View>
 
         <View style={styles.textdiv}>
-            <Text style={styles.title}>Introduction to HTML</Text>
+            <Text style={styles.title}>{items.title}</Text>
 
-            <Text style={styles.type}>Frontend - Beginner</Text>
+            <Text style={styles.type}>{items.type} - {items.level}</Text>
 
             <View style={{
                 flexDirection:"row"
@@ -27,13 +27,27 @@ function RecommendCard() {
                 <Text style={{
                     fontSize:15,
                     fontWeight:"bold"
-                }}>4.5</Text>
+                }}>{items.rating}</Text>
+            </View>
+
+            <View style={{
+                flexDirection:'row',
+                justifyContent:'space-between',
+            }}>
+
+{/* 30631 */}
+           
+            <View style={items.payment == "Free" ? styles.badge : styles.badgepaid}>
+                <Text style={styles.badgeText}>{items.payment}</Text>
+            </View>
+
+            <View style={items.payment=="Free" ? {display:"none"} : {display:"flex"}} >
+                 <Text style={{fontSize:16,fontWeight:"600"}}>N{items.amount}</Text>
+            </View>
+
             </View>
 
 
-            <View style={styles.badge}>
-                <Text style={styles.badgeText}>Free</Text>
-            </View>
 
         </View>
 
@@ -46,8 +60,7 @@ function RecommendCard() {
 
 const styles = StyleSheet.create({
     recommended:{
-        width:"60%",
-        height:"35%",
+       width:220,
         backgroundColor:"white",
         marginHorizontal:15,
         borderWidth:0.4,
@@ -91,6 +104,14 @@ const styles = StyleSheet.create({
 
      badge:{
         backgroundColor:"#008000",
+        paddingVertical:1,
+        paddingHorizontal:10,
+        borderRadius:20,
+        width:"35%"
+
+     },
+     badgepaid:{
+        backgroundColor:"red",
         paddingVertical:1,
         paddingHorizontal:10,
         borderRadius:20,

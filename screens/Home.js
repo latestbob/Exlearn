@@ -10,7 +10,7 @@ function Home({navigation}) {
             <Text style={styles.introtext}> Japa with Tech for FREE</Text>
 
            <TouchableOpacity onPress={function(){
-              navigation.navigate('Main');
+              navigation.navigate('BottomNavigation');
            }}>
                 <View  style={styles.buttons}>
                         <Text style={styles.buttontext}>Start Learning For Free</Text>

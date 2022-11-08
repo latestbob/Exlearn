@@ -3,10 +3,11 @@ import { View, Text, Button, StyleSheet, Image, ScrollView , TextInput} from 're
 import Logo from '../components/Logo';
 import { useState } from 'react';
 import RecommendCard from '../components/RecommendCard';
+import RecommendList from '../components/RecommendList';
 
 
 
-function Main() {
+function Main({navigation, route}) {
     const [search, setSearched] = useState("");
 
 function handleSearchInput(e){
@@ -74,7 +75,7 @@ function handleSearchInput(e){
 
             </View> */}
 
-            <RecommendCard />
+            <RecommendList navigation={navigation} route={route}/>
 
 
 
