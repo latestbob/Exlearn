@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
@@ -6,20 +7,52 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 // Screens
-import Main from './screens/Main';
-import Course from './screens/Course';
-import MyVideos from './screens/Myvideos';
-import Purchase from './screens/Purchase';
-import Profile from './screens/Profile';
-import Lessons from './screens/Lessons';
 
-import BottomNavigation from './components/BottomNavigation';
+import AuthStack from './components/AuthStack';
+import Login from './screens/auth/Login';
+import Register from './screens/auth/Register';
+
+import { AuthContextProvider } from './context/AuthContext';
+import { AuthContext } from './context/AuthContext';
+import { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
+import Navigations from './components/Navigations';
 
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+  
+  // const {token , name} = React.useContext(AuthContext);
+  //  const [mytoken, setMyToken] = useState(null);
+
+
+//   async function getToken(){
+//     try {
+//         const myvalue = await AsyncStorage.getItem('token')
+//         if(myvalue !== null) {
+//           setMyToken(myvalue)
+
+//         }
+//       } catch(e) {
+//         // error reading value
+//         console.log(e);
+//       }
+// }
+  
+    //   useEffect(() => {
+    //   // Update the document title using the browser API
+      
+    //     getToken();
+    //     console.log(token)
+    //     console.log(name)
+
+
+    // },[token]);
+    
+  
   return (
     // <View style={styles.container}>
 
@@ -27,24 +60,16 @@ export default function App() {
       
     //   <StatusBar style="auto" />
     // </View>
+    
     <NavigationContainer>
-       <Stack.Navigator screenOptions={{
-    headerShown: false
-  }}>
-          
-          <Stack.Screen name="Home" component={Home} />
-          {/* <Stack.Screen name="Main" component={Main} /> */}
-          <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-          <Stack.Screen name="Course" component={Course}/>
-          <Stack.Screen name="Lessons"component={Lessons} />
-
-          
-          
-       </Stack.Navigator>
+      <AuthContextProvider>
+          <Navigations />
+       </AuthContextProvider>
        
 
        
     </NavigationContainer>
+    
     
   );
 }

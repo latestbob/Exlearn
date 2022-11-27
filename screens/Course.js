@@ -7,19 +7,24 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import CourseSection from '../components/CourseSection';
 import CourseSectionList from '../components/CourseSectionList';
 
-function Course({ navigation }) {
+function Course({ route, navigation }) {
+    const { items } = route.params;
+
+
+
     
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.topbar}>
                 <Ionicons onPress={function () {
-                    navigation.navigate('Main');
+                    // navigation.navigate('Main');
+                    navigation.goBack();
                 }} name="arrow-back" size={32} color="#615E5E" />
-                <Text style={styles.topbarText}>Back Home</Text>
+                <Text style={styles.topbarText}>Back</Text>
             </View>
 
             <View style={styles.imageView}>
-                <Image style={styles.myimage} source={{ uri: "https://res.cloudinary.com/edifice-solutions/image/upload/v1667248341/Screenshot_2022-10-30_at_6.14.15_PM_vat5rv.png" }} resizeMethod="resize" resizeMode="cover" />
+                <Image style={styles.myimage} source={{ uri: items.image_url }} resizeMethod="resize" resizeMode="cover" />
 
             </View>
 
@@ -30,10 +35,10 @@ function Course({ navigation }) {
             }}>
 
                 <View style={styles.intro}>
-                    <Text style={styles.intro_heading}>Introduction to HTML</Text>
+                    <Text style={styles.intro_heading}>{items.title}</Text>
 
                     <View style={styles.intro_rate_type}>
-                        <Text style={styles.intro_type}>Frontend - Beginner</Text>
+                        <Text style={styles.intro_type}>{items.type} - {items.level}</Text>
                         <View style={styles.intro_rate}>
                             <Image style={{
                                 width: 20,
@@ -45,7 +50,7 @@ function Course({ navigation }) {
                             <Text style={{
                                 fontSize: 15,
                                 fontWeight: "bold"
-                            }}>4.5</Text>
+                            }}>5.0</Text>
                         </View>
 
 
@@ -53,9 +58,13 @@ function Course({ navigation }) {
 
                     </View>
 
-                    <View style={styles.badge}>
-                            <Text style={styles.badgeText}>Free</Text>
-                        </View>
+                    {
+                        items.payment_type == "Free" && <View style={styles.badge}>
+                        <Text style={styles.badgeText}>{items.payment_type}</Text>
+                    </View>
+                    }
+
+                    
                 </View>
 
                 <View style={styles.author}>
@@ -66,10 +75,24 @@ function Course({ navigation }) {
                     }} source={{uri:"https://edificesolutions.com.ng/assets/img/edifice%20solutions.PNG"  }} resizeMethod="resize" resizeMode="contain" />
                     
                     <View style={styles.authorText}>
-                        <Text style={{fontWeight:"bold"}}>Tutor - Bobson Edidiong Anthony</Text>
-                        <Text style={{fontSize:11}}>CEO Exlearn, Senior Software Engineer</Text>
+                        
+                        <View style={{
+                            paddingHorizontal:20
+                        }}>
+                            <Text style={{fontWeight:"bold"}}>Tutor - {items.tutor}</Text>
+                        <Text style={{fontSize:11}}>{items.tutor_description}</Text>
+                        </View>
                     </View>
                 </View>
+                <View style={{
+                            paddingHorizontal:15,
+                            paddingVertical:10,
+                        }}>
+                            <Text style={{
+                                textAlign:"justify",
+                                fontSize:12.
+                            }}>{items.course_description}</Text>
+                        </View>
 
 
 
@@ -81,7 +104,7 @@ function Course({ navigation }) {
                 </View>
 
                 {/* <CourseSection /> */}
-                <CourseSectionList navigation={navigation} />
+                <CourseSectionList items={items} coursecode={items.coursecode} navigation={navigation} />
 
             </View>
         </ScrollView>
@@ -156,6 +179,14 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         textAlign: "center"
     },
+    badgepaid:{
+        backgroundColor:"red",
+        paddingVertical:1,
+        paddingHorizontal:10,
+        borderRadius:20,
+        width:"20%"
+
+     },
 
     author:{
         height: 80,

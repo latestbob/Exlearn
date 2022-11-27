@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
+
 function Home({navigation}) {
+   
+
+    
+
     return (  
         <View style={styles.container}>
             <Image source={{uri:'https://res.cloudinary.com/edifice-solutions/image/upload/v1667156113/edificesolutions-removebg-preview_vwy9lg.png'}}  style={styles.logo} resizeMode="contain" resizeMethod="resize" />
@@ -10,12 +15,15 @@ function Home({navigation}) {
             <Text style={styles.introtext}> Japa with Tech for FREE</Text>
 
            <TouchableOpacity onPress={function(){
-              navigation.navigate('BottomNavigation');
+              navigation.navigate('Login');
            }}>
                 <View  style={styles.buttons}>
                         <Text style={styles.buttontext}>Start Learning For Free</Text>
                     </View>
            </TouchableOpacity>
+
+
+         
         </View>
     );
 }

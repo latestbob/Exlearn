@@ -16,10 +16,22 @@ import Main from '../screens/Main';
 import MyVideos from '../screens/Myvideos';
 import Purchase from '../screens/Purchase';
 import Profile from '../screens/Profile';
+import { AuthContext } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 const Tab = createBottomTabNavigator();
 function BottomNavigation() {
+  const {token , setToken, getToken, email} = React.useContext(AuthContext);
 
+  useEffect(() => {
+      // Update the document title using the browser API
+      
+      
+        getToken();
+        console.log(token);
+
+
+    },[email]);
 
     return (  
          <Tab.Navigator
@@ -34,7 +46,7 @@ function BottomNavigation() {
               iconName = focused
                 ? 'home'
                 : 'home-outline';
-            } else if (route.name === 'Myvideos') {
+            } else if (route.name === 'Free') {
               iconName = focused ? 'videocam' : 'videocam-outline';
             }
 
@@ -55,7 +67,7 @@ function BottomNavigation() {
         })}>
 
         <Tab.Screen name="Main" component={Main} />
-        <Tab.Screen name="Myvideos" component={MyVideos} />
+        <Tab.Screen name="Free" component={MyVideos} />
         <Tab.Screen name="Purchase" component={Purchase} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator> 

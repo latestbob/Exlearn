@@ -1,38 +1,40 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image, ScrollView , TextInput, TouchableOpacity} from 'react-native';
 import Logo from '../components/Logo';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 import CourseSection from './CourseSection';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 
 
-function CourseSectionList({navigation}) {
+function CourseSectionList({navigation, coursecode, items}) {
+
+    const {baseUrl} = React.useContext(AuthContext);
+    useEffect(() => {
+        // Update the document title using the browser API
+        
+        axios.get(`${baseUrl}api/sections/${coursecode}`, {
+
+            
+
+        }).then(response => {
+           // console.log(response)
+            //console.log(response.data)
+
+            setSection(response.data)
+
+          
+        }).catch(error => {
+            console.log(error)
+        })
+
+
+
+      },[]);
       const [sections , setSection] = useState([
-        {
-            "name":"Introducton to Course",
-            "minutes":45,
-           
-        },
-        {
-            "name":"Scope of  Course",
-            "minutes":120,
-        },
-
-        {
-            "name":"Types of  Course",
-            "minutes":180,
-        },
-
-        {
-            "name":"Methods to Course",
-            "minutes":120,
-        },
-
-        {
-            "name":"Examples Course",
-            "minutes":45,
-        },
+        
     ]);
 
     return ( 
@@ -49,7 +51,10 @@ function CourseSectionList({navigation}) {
                 <TouchableOpacity style={{
                     marginVertical:5,
                 }} key={index} onPress={function(){
-                   navigation.navigate('Lessons');
+                   navigation.navigate('Lessons',{
+                       items:items,
+                       section_code:`${item.section.section_code}`
+                   });
                 }}>
                     <CourseSection items={item}  />
 

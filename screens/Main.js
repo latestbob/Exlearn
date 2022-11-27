@@ -4,21 +4,22 @@ import Logo from '../components/Logo';
 import { useState } from 'react';
 import RecommendCard from '../components/RecommendCard';
 import RecommendList from '../components/RecommendList';
+import { AuthContext } from '../context/AuthContext';
 
 
 
 function Main({navigation, route}) {
-    const [search, setSearched] = useState("");
+    const {search, setSearched} = React.useContext(AuthContext);
 
 function handleSearchInput(e){
-    setSearched(e)
-    console.log(search)
+    setSearched(e);
+    console.log(search);
 }
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
             <View style={styles.topheader}>
-                <Logo />
+                <Logo navigation={navigation} />
 
                 <View style={styles.textview}>
                     <Text style={styles.textviewtext}>Shape your future with the right skills,

@@ -24,7 +24,7 @@ function CourseSection({items}) {
                         color:"white",
                         fontSize:16,
                         fontWeight:"700"
-                        }}>{items.name}</Text>
+                        }}>{items.section.title}</Text>
                     <Text style={{
                         fontSize:11,
                         color:"white"

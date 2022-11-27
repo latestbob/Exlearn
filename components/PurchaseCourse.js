@@ -4,7 +4,7 @@ import Logo from '../components/Logo';
 import { useState } from 'react';
 
 
-function RecommendCard({items}) {
+function PurchaseCourse({items}) {
     return ( 
         <View style={styles.recommended}>
         <View style={styles.imageview}>
@@ -37,13 +37,13 @@ function RecommendCard({items}) {
 
 {/* 30631 */}
            
-            <View style={items.payment_type == "Free" ? styles.badge : styles.badgepaid}>
-                <Text style={styles.badgeText}>{items.payment_type}</Text>
+            <View style={styles.badge}>
+                <Text style={styles.badgeText}>Enrolled</Text>
             </View>
 
-            <View style={items.payment_type=="Free" ? {display:"none"} : {display:"flex"}} >
+            {/* <View style={items.payment_type=="Free" ? {display:"none"} : {display:"flex"}} >
                  <Text style={{fontSize:16,fontWeight:"600"}}>N{items.amount}</Text>
-            </View>
+            </View> */}
 
             </View>
 
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         paddingVertical:1,
         paddingHorizontal:10,
         borderRadius:20,
-        width:"35%"
+        width:"40%"
 
      },
      badgepaid:{
@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
 
      badgeText:{
         color:"white",
-        fontSize:13,
+        fontSize:12,
         fontWeight:"600",
         textAlign:"center"
      }
 
 })
-export default RecommendCard;
+export default PurchaseCourse;
