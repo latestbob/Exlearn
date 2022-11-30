@@ -8,7 +8,7 @@ export const AuthContext = createContext({}); //create context
 //default is 2000 naira
 
 export const AuthContextProvider = function ({ children }) {
-  const baseUrl = "https://ea81-197-210-28-251.eu.ngrok.io/";
+  const baseUrl = "https://7387-102-89-34-224.eu.ngrok.io/";
     //token
 
 

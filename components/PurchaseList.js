@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 function PurchaseList({navigation}) {
 
     const {getToken, email} = React.useContext(AuthContext);
-    const baseUrl = "https://ea81-197-210-28-251.eu.ngrok.io/";
+    const baseUrl = "https://7387-102-89-34-224.eu.ngrok.io/";
     useEffect(() => {
         // Update the document title using the browser API
         getToken();

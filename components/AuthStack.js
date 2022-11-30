@@ -12,6 +12,7 @@ import Lessons from '../screens/Lessons';
 
 import BottomNavigation from './BottomNavigation';
 import Payment from '../screens/Payment';
+import Feedback from '../screens/Feedback';
 
 const Stack = createNativeStackNavigator();
 function AuthStack() {
@@ -23,6 +24,7 @@ function AuthStack() {
           <Stack.Screen name="Course" component={Course}/>
           <Stack.Screen name="Lessons"component={Lessons} />
           <Stack.Screen name="Payment" component={Payment} />
+          <Stack.Screen name="Feedback" component={Feedback} />
         </Stack.Navigator>
     );
 }

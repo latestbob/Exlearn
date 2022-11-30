@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity, Share } from 'react-native';
 import Logo from '../components/Logo';
 import { useState, useEffect } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AuthContext } from '../context/AuthContext';
 
 
-function Profile() {
+function Profile({navigation}) {
 
     const {email, username, getToken, removeToken} = React.useContext(AuthContext);
 
@@ -20,6 +20,28 @@ function Profile() {
   
   
       },[]);
+
+      const onShare = async () => {
+        try {
+          const result = await Share.share({
+            message:
+              'Hi, I"ve found something awesome, try ExLearn.',
+              url:"https://exlearn.online"
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -76,16 +98,18 @@ function Profile() {
             <View style={styles.sidebar}>
 
                         {/* Favourites */}
-                <View style={styles.sidebarView}>
+                {/* <View style={styles.sidebarView}>
                     <Ionicons style={{
 
                     }} name="heart-outline" size={30} color="purple" />
 
                     <Text style={styles.sideBarText}>Your Favourite</Text>
-                </View>
+                </View> */}
 
                 {/* Purchase Course */}
-
+                <TouchableOpacity onPress={function(){
+                    navigation.navigate("Purchase");
+                }}>
                 <View style={styles.sidebarView}>
                     <Ionicons style={{
 
@@ -93,10 +117,11 @@ function Profile() {
 
                     <Text style={styles.sideBarText}>My Courses</Text>
                 </View>
-
+                </TouchableOpacity>
 
                 {/* Share  */}
-
+                
+                <TouchableOpacity onPress={onShare}>
                 <View style={styles.sidebarView}>
                     <Ionicons style={{
 
@@ -104,9 +129,13 @@ function Profile() {
 
                     <Text style={styles.sideBarText}>Tell A Friend</Text>
                 </View>
-
+                    </TouchableOpacity>
 
                     {/* Feedback */}
+
+            <TouchableOpacity onPress={function(){
+                navigation.navigate("Feedback");
+            }}>
 
                 <View style={styles.sidebarView}>
                     <Ionicons style={{
@@ -115,6 +144,7 @@ function Profile() {
 
                     <Text style={styles.sideBarText}>Feedback</Text>
                 </View>
+                </TouchableOpacity>
 
                  {/* Settings */}
 
@@ -124,6 +154,13 @@ function Profile() {
                     }} name="settings-outline" size={30} color="#FFAF19" />
 
                     <Text style={styles.sideBarText}>Settings</Text>
+
+                    <Text style={{
+                        color:"orange",
+                        fontSize:14,
+                        fontWeight:"bold",
+                        marginLeft:100,
+                    }}>Coming Soon</Text>
                 </View>
 
 

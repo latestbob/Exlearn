@@ -48,29 +48,46 @@ function ResetPassword({navigation,route}) {
         <Formik
             initialValues={{ code: '', password: '' }}
             onSubmit={function(values){
-                //setLoading(true);
+                setLoading(true);
                 
-                // axios.post(`${baseUrl}api/login`, {
+                 axios.post(`${baseUrl}api/reset-password`, {
 
-                //     "email":values.email,
-                //     "password":values.password
+                    "email":email,
+                    "code":values.code,
+                    "password":values.password
 
-                // }).then(response => {
-                //    console.log(response)
-                //     console.log(response.data)
-                //     //console.log(response.data.token)
+                }).then(response => {
+                   console.log(response)
+                    console.log(response.data)
+                    //console.log(response.data.token)
         
-                //     setLoading(false);
-                //     //  console.log(response.data.user.name);
-                //     AddToStorage(response.data.token, response.data.user.email, response.data.user.name );
-                //     // navigation.navigate("AuthStack");
+                    setLoading(false);
+                    //  console.log(response.data.user.name);
+                   
+                    if(response.data.status =="success"){
+                        alert("Password Updated Successfully");
+                        navigation.navigate("Login");
+                    }
+                    // navigation.navigate("AuthStack");
                    
 
 
                   
-                // }).catch(error => {
-                //     console.log(error)
-                // })
+                }).catch(error => {
+                   // console.log(error)
+
+                   if (error.response) {
+                        
+                    //console.log(error.response.data.status);
+                    if(error.response.data.status == "failed"){
+                        setLoading(false);
+                        console.log(error.response.data.status);
+                      
+                       
+                      
+                    }
+                }
+                })
             }}
             validate={function (values) {
 
@@ -80,7 +97,7 @@ function ResetPassword({navigation,route}) {
                 if (!values.code) {
                     errors.code = '6 digits token code is required';
                 }
-                else if (!values.code.length < 6) {
+                else if (values.code.length < 6) {
                     errors.code = 'Token code should be 6 digits';
                 } 
 
@@ -206,10 +223,7 @@ function ResetPassword({navigation,route}) {
             )}
         </Formik>
 
-        <Text style={{
-            fontSize:20,
-            color:"white"
-        }}>{email}</Text>
+        
     </View>
     }
         

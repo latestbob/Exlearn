@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import {useState} from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 
 
 function Login({navigation}) {
@@ -14,10 +15,10 @@ function Login({navigation}) {
     const [isLoading , setLoading] = useState(false);
 
     const [hide, setHide] = useState(true);
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
     return (
-
-        <>
+<>
         {isLoading ? <View style={{
             height:"100%",
             justifyContent:"center",
@@ -25,6 +26,7 @@ function Login({navigation}) {
         }}>
             <ActivityIndicator  size="large"/>
         </View> :
+        
         
         <View style={styles.container}>
 
@@ -228,6 +230,7 @@ function Login({navigation}) {
             )}
         </Formik>
     </View>
+    
     }
         
         </>

@@ -106,6 +106,12 @@ function Course({ route, navigation }) {
                 {/* <CourseSection /> */}
                 <CourseSectionList items={items} coursecode={items.coursecode} navigation={navigation} />
 
+                <View style={{
+                    height:100,
+                }}>
+
+                </View>
+
             </View>
         </ScrollView>
     );
@@ -118,7 +124,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#A59F9F",
         borderBottomWidth: 0.5,
         flexDirection: "row",
-        marginTop: 30,
+        marginTop: 50,
         paddingHorizontal: 15,
     },
     topbarText: {

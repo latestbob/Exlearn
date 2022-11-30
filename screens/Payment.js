@@ -14,6 +14,7 @@ function Payment({ route, navigation }) {
     const paystackWebViewRef = useRef(paystackProps.PayStackRef);
     const { email, getToken, baseUrl} = React.useContext(AuthContext);
     const [isLoading, setLoading] = useState(false);
+    const [publicKey, setPublicKey] = useState("");
 
   
     useEffect(() => {
@@ -21,11 +22,35 @@ function Payment({ route, navigation }) {
 
 
         getToken();
-        //   console.log("username is " + username);
-        //   console.log("Email is " + email)
 
 
-    }, []);
+        axios.get(`${baseUrl}api/publickey`, {
+
+            
+
+        }).then(response => {
+           //console.log(response)
+            //console.log(response.data.status)
+
+            if(response.data.status == "success"){
+                setPublicKey(response.data.public_key);
+            }
+
+
+            
+           
+
+
+          
+        }).catch(error => {
+            console.log(error)
+
+         
+        })
+        
+
+
+    }, [publicKey]);
 
 
 
@@ -119,7 +144,7 @@ function Payment({ route, navigation }) {
                         </View>
 
                         <Paystack
-                            paystackKey="pk_test_ec7937300289fa09c4a960e34cd0c89a3f5f4c84"
+                            paystackKey={publicKey}
                             billingEmail={email}
                             amount={items.amount}
 

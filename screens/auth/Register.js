@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator,SafeAreaView } from 'react-native';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {useState} from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
+import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 
 function Register({ navigation }) {
     
@@ -13,10 +14,12 @@ function Register({ navigation }) {
     const [isLoading , setLoading] = useState(false);
 
     const [hide, setHide] = useState(true);
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
     return (
 
         <>
+         
         
         {
             isLoading ? <View style={{
@@ -25,7 +28,11 @@ function Register({ navigation }) {
                 alignItems:"center"
             }}>
                 <ActivityIndicator  size="large"/>
-            </View> :<View style={styles.container}>
+            </View> :
+           
+            <View style={styles.container}>
+                
+
 
 <View style={{
     width: 150,
@@ -75,8 +82,8 @@ function Register({ navigation }) {
                 console.log(error.response.data.status);
                 if(error.response.data.status == "failed"){
                     setLoading(false);
-                    //alert(error.response.data);
-                    console.log(error.response.data.message)
+                    alert(error.response.data.message.email);
+                    //console.log(error.response.data)
                    
                   
                 }
@@ -115,6 +122,7 @@ function Register({ navigation }) {
     }}
 >
     {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+         
         <View style={{
             width: "100%",
             paddingHorizontal: 10,
@@ -165,6 +173,7 @@ function Register({ navigation }) {
                 fontWeight: "500"
             }}>{errors.email}</Text> : null}
 
+
 <View style={styles.input}>
         <TextInput style={{
             flex:1,
@@ -195,6 +204,7 @@ function Register({ navigation }) {
          
 
     </View>
+   
             {errors.password && touched.password ? <Text style={{
                 color: "red",
                 fontWeight: "500"
@@ -241,11 +251,16 @@ function Register({ navigation }) {
                 </View>
             </TouchableOpacity>
         </View>
+        
     )}
 </Formik>
+
 </View>
+
+
+
         }
-        
+       
         </>
 
         
@@ -255,12 +270,13 @@ function Register({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 30,
+        paddingTop: 60,
         flexDirection: "column",
 
         alignItems: "center",
         backgroundColor: "#0B1F48",
-        flex: 1
+        flex:1
+       
     },
     logo: {
         width: 190,
